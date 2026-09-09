@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #1a1614;
+  --paper: #f6f2ec;
+  --paper-raised: #ffffff;
+  --text: #241f1c;
+  --text-soft: #6b625a;
+  --text-on-dark: #f6f2ec;
+  --text-on-dark-soft: rgba(246, 242, 236, 0.6);
+
+  --wine: #7a1f2b;
+  --wine-text: #5e1620;
+  --wine-on-dark: #c65a68;
+  --wine-dim: rgba(122, 31, 43, 0.08);
+
+  --border: rgba(36, 31, 28, 0.1);
+  --border-strong: rgba(36, 31, 28, 0.2);
+
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+* {
+  border-color: var(--border);
+}
+
+body {
+  background: var(--paper);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.65;
+}
