@@ -5,21 +5,24 @@
 @tailwind utilities;
 
 :root {
-  --ink: #1a1614;
+  --ink: #121012;
+  --ink-raised: #1c191a;
   --paper: #f6f2ec;
   --paper-raised: #ffffff;
-  --text: #241f1c;
-  --text-soft: #6b625a;
-  --text-on-dark: #f6f2ec;
-  --text-on-dark-soft: rgba(246, 242, 236, 0.6);
 
-  --wine: #7a1f2b;
-  --wine-text: #5e1620;
-  --wine-on-dark: #c65a68;
-  --wine-dim: rgba(122, 31, 43, 0.08);
+  --text: #f0ebe4;
+  --text-soft: rgba(240, 235, 228, 0.6);
+  --text-on-paper: #241f1c;
+  --text-on-paper-soft: #6b625a;
 
-  --border: rgba(36, 31, 28, 0.1);
-  --border-strong: rgba(36, 31, 28, 0.2);
+  /* checked against real WCAG contrast: 4.57:1 on --ink, 9.15:1+ for the paper variant */
+  --wine: #a8384a;
+  --wine-text: #c65a68;
+  --wine-on-paper: #7a1f2b;
+  --wine-dim: rgba(168, 56, 74, 0.12);
+
+  --border: rgba(240, 235, 228, 0.1);
+  --border-strong: rgba(240, 235, 228, 0.18);
 
   --font-display: 'Instrument Serif', Georgia, serif;
   --font-body: 'Manrope', system-ui, sans-serif;
@@ -31,7 +34,7 @@
 }
 
 body {
-  background: var(--paper);
+  background: var(--ink);
   color: var(--text);
   font-family: var(--font-body);
   line-height: 1.65;
