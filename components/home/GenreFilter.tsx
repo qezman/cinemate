@@ -19,7 +19,7 @@ export function GenreFilter({ activeGenre, onSelect }: GenreFilterProps) {
   }, []);
 
   return (
-    <div className="sticky top-[65px] z-30 flex flex-wrap gap-2 bg-paper py-4">
+    <div className="sticky top-[65px] z-30 flex flex-wrap gap-2 bg-ink py-4">
       <Pill label="All" active={activeGenre === null} onClick={() => onSelect(null)} />
       {genres.map((genre) => (
         <Pill

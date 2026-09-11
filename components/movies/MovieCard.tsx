@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import { buildImageUrl } from "@/lib/tmdb/image";
-import { useTilt } from "@/hooks/useTilt";
-import type { Movie } from "@/types/movie";
+import Image from 'next/image';
+import Link from 'next/link';
+import { buildImageUrl } from '@/lib/tmdb/image';
+import { useTilt } from '@/hooks/useTilt';
+import type { Movie } from '@/types/movie';
 
 export function MovieCard({ movie }: { movie: Movie }) {
   const tilt = useTilt<HTMLDivElement>();
-  const poster = buildImageUrl(movie.poster_path, "w342");
-  const year = movie.release_date?.slice(0, 4) ?? "—";
+  const poster = buildImageUrl(movie.poster_path, 'w342');
+  const year = movie.release_date?.slice(0, 4) ?? '—';
 
   return (
     <Link href={`/movies/${movie.id}`} className="group block">
@@ -17,7 +17,7 @@ export function MovieCard({ movie }: { movie: Movie }) {
         ref={tilt.ref}
         onMouseMove={tilt.onMouseMove}
         onMouseLeave={tilt.onMouseLeave}
-        className="aspect-[2/3] overflow-hidden rounded-sm bg-paper-raised transition-transform duration-150 ease-out"
+        className="aspect-[2/3] overflow-hidden rounded-sm bg-ink-raised transition-transform duration-150 ease-out"
       >
         {poster ? (
           <Image
@@ -34,9 +34,7 @@ export function MovieCard({ movie }: { movie: Movie }) {
         )}
       </div>
 
-      <h3 className="mt-3 truncate font-semibold group-hover:text-wine-text">
-        {movie.title}
-      </h3>
+      <h3 className="mt-3 truncate font-semibold group-hover:text-wine-text">{movie.title}</h3>
       <p className="font-mono text-caption text-text-soft">
         {year} · {movie.vote_average.toFixed(1)}
       </p>
