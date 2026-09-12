@@ -15,9 +15,6 @@
   --text-on-paper: #241f1c;
   --text-on-paper-soft: #6b625a;
 
-  /* real WCAG contrast, not estimated: wine-text is 4.86:1 on the wine-dim
-     pill background (was 4.24:1 and failed AA - axe-core caught it) and
-     4.79:1 on plain ink; wine-on-paper is 9.15:1+ on the paper variants */
   --wine: #a8384a;
   --wine-text: #cf6674;
   --wine-on-paper: #7a1f2b;
