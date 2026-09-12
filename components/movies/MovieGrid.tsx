@@ -1,5 +1,5 @@
-import { MovieCard } from "./MovieCard";
-import type { Movie } from "@/types/movie";
+import { MovieCard } from './MovieCard';
+import type { Movie } from '@/types/movie';
 
 export function MovieGrid({ movies }: { movies: Movie[] }) {
   if (movies.length === 0) {

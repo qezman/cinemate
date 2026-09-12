@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useCallback, useEffect, useState } from "react";
-import type { WatchlistEntry } from "@/types/watchlist";
+import { useCallback, useEffect, useState } from 'react';
+import type { WatchlistEntry } from '@/types/watchlist';
 
-const STORAGE_KEY = "cinemate-watchlist";
+const STORAGE_KEY = 'cinemate-watchlist';
 
 // The only place in the app that touches localStorage.
 function readStorage(): WatchlistEntry[] {
-  if (typeof window === "undefined") return [];
+  if (typeof window === 'undefined') return [];
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     return raw ? JSON.parse(raw) : [];
@@ -31,10 +31,7 @@ export function useWatchlist() {
     setEntries(readStorage());
   }, []);
 
-  const isSaved = useCallback(
-    (id: number) => entries.some((entry) => entry.id === id),
-    [entries],
-  );
+  const isSaved = useCallback((id: number) => entries.some((entry) => entry.id === id), [entries]);
 
   const toggle = useCallback((id: number) => {
     setEntries((current) => {
