@@ -1,15 +1,20 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { buildImageUrl } from '@/lib/tmdb/image';
-import { useTilt } from '@/hooks/useTilt';
-import type { Movie } from '@/types/movie';
+import Image from "next/image";
+import Link from "next/link";
+import { buildImageUrl } from "@/lib/tmdb/image";
+import { useTilt } from "@/hooks/useTilt";
+import type { Movie } from "@/types/movie";
 
-export function MovieCard({ movie }: { movie: Movie }) {
+interface MovieCardProps {
+  movie: Movie;
+  onRemove?: (id: number) => void;
+}
+
+export function MovieCard({ movie, onRemove }: MovieCardProps) {
   const tilt = useTilt<HTMLDivElement>();
-  const poster = buildImageUrl(movie.poster_path, 'w342');
-  const year = movie.release_date?.slice(0, 4) ?? '—';
+  const poster = buildImageUrl(movie.poster_path, "w342");
+  const year = movie.release_date?.slice(0, 4) ?? "—";
 
   return (
     <Link href={`/movies/${movie.id}`} className="group block">
@@ -17,7 +22,7 @@ export function MovieCard({ movie }: { movie: Movie }) {
         ref={tilt.ref}
         onMouseMove={tilt.onMouseMove}
         onMouseLeave={tilt.onMouseLeave}
-        className="aspect-[2/3] overflow-hidden rounded-sm bg-ink-raised transition-transform duration-150 ease-out"
+        className="relative aspect-[2/3] overflow-hidden rounded-sm bg-ink-raised transition-transform duration-150 ease-out"
       >
         {poster ? (
           <Image
@@ -32,9 +37,25 @@ export function MovieCard({ movie }: { movie: Movie }) {
             No poster
           </div>
         )}
+
+        {onRemove && (
+          <button
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              onRemove(movie.id);
+            }}
+            aria-label={`Remove ${movie.title} from watchlist`}
+            className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-ink/80 text-lg leading-none opacity-0 transition-opacity group-hover:opacity-100"
+          >
+            ×
+          </button>
+        )}
       </div>
 
-      <h3 className="mt-3 truncate font-semibold group-hover:text-wine-text">{movie.title}</h3>
+      <h3 className="mt-3 truncate font-semibold group-hover:text-wine-text">
+        {movie.title}
+      </h3>
       <p className="font-mono text-caption text-text-soft">
         {year} · {movie.vote_average.toFixed(1)}
       </p>
