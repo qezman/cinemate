@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,8 +14,8 @@ interface MovieCardProps {
 
 export function MovieCard({ movie, onRemove }: MovieCardProps) {
   const tilt = useTilt<HTMLDivElement>();
-  const poster = buildImageUrl(movie.poster_path, 'w342');
-  const year = movie.release_date?.slice(0, 4) ?? '—';
+  const poster = buildImageUrl(movie.poster_path, "w342");
+  const year = movie.release_date?.slice(0, 4) ?? "—";
 
   return (
     <Link href={`/movies/${movie.id}`} className="group block">
@@ -54,7 +54,9 @@ export function MovieCard({ movie, onRemove }: MovieCardProps) {
         )}
       </div>
 
-      <h3 className="mt-3 truncate font-semibold group-hover:text-wine-text">{movie.title}</h3>
+      <h3 className="mt-3 truncate font-semibold group-hover:text-wine-text">
+        {movie.title}
+      </h3>
       <p className="font-mono text-caption text-text-soft">
         {year} · {movie.vote_average.toFixed(1)}
       </p>
