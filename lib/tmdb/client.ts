@@ -1,20 +1,22 @@
-// Server components need a full URL to fetch our own API route;
-// the browser can just use a relative path.
-function getBaseUrl(): string {
-  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  return "http://localhost:3000";
-}
+const TMDB_BASE = 'https://api.themoviedb.org/3';
 
-export async function tmdbFetch<T>(
-  path: string,
-  params: Record<string, string> = {},
-): Promise<T> {
+// Server components call TMDB directly - no reason to round-trip through
+// our own API route when we're already on the server. The browser still
+// only ever sees /api/tmdb, so the read token never ships to the client.
+export async function tmdbFetch<T>(path: string, params: Record<string, string> = {}): Promise<T> {
   const query = new URLSearchParams(params).toString();
-  const onServer = typeof window === "undefined";
-  const url = `${onServer ? getBaseUrl() : ""}/api/tmdb${path}${query ? `?${query}` : ""}`;
+  const onServer = typeof window === 'undefined';
+  const queryString = query ? `?${query}` : '';
 
-  const res = await fetch(url, onServer ? { cache: "no-store" } : undefined);
+  const url = onServer ? `${TMDB_BASE}${path}${queryString}` : `/api/tmdb${path}${queryString}`;
+
+  const res = await fetch(url, {
+    ...(onServer && {
+      headers: { Authorization: `Bearer ${process.env.TMDB_READ_TOKEN}`, Accept: 'application/json' },
+    }),
+    cache: 'no-store',
+  });
+
   if (!res.ok) throw new Error(`TMDB request failed (${res.status}): ${path}`);
   return res.json();
 }
