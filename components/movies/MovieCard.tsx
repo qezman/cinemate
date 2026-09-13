@@ -1,10 +1,11 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
-import { buildImageUrl } from "@/lib/tmdb/image";
-import { useTilt } from "@/hooks/useTilt";
-import type { Movie } from "@/types/movie";
+import Image from 'next/image';
+import Link from 'next/link';
+import { X } from 'lucide-react';
+import { buildImageUrl } from '@/lib/tmdb/image';
+import { useTilt } from '@/hooks/useTilt';
+import type { Movie } from '@/types/movie';
 
 interface MovieCardProps {
   movie: Movie;
@@ -46,9 +47,9 @@ export function MovieCard({ movie, onRemove }: MovieCardProps) {
               onRemove(movie.id);
             }}
             aria-label={`Remove ${movie.title} from watchlist`}
-            className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-ink/80 text-lg leading-none opacity-0 transition-opacity group-hover:opacity-100"
+            className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-ink/80 opacity-0 transition-opacity group-hover:opacity-100"
           >
-            ×
+            <X size={16} />
           </button>
         )}
       </div>
