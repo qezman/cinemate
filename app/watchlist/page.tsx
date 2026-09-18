@@ -32,7 +32,10 @@ export default function WatchlistPage() {
     return () => {
       cancelled = true;
     };
-  }, [ids]);
+    // ids is an array - depend on its actual values, not the reference,
+    // so a fresh (but identical) array doesn't refetch everything again.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ids.join(',')]);
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-16">
